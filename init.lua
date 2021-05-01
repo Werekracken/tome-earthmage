@@ -12,6 +12,8 @@ Adds the Earth Mage as a mage class that combines earth magics with wild gifts. 
 
 Mana and equilibruim are their resources and their most important stat is Magic followed by Willpower and Constitution. They use some existing talent trees from Archmage and Stone Warden, and have a new class tree: Spell / Lapidary. Their playstyle is multitarget, area of effect, and damage over time, with a lot of options for survivability.
 
+https://github.com/Werekracken/tome-earthmage
+
 -- generic
 Spell / Stone alchemy
 Spell / Conveyance
