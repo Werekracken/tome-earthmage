@@ -20,7 +20,7 @@ Mana and equilibrium are their resources and their most important stat is Magic 
 
 [Download](https://te4.org/games/addons/tome/earthmage)
 
-[Forum]()
+[Forum](https://forums.te4.org/viewtopic.php?f=50&t=52021&sid=ea70523876a510542ec09a7df86201a2)
 
 ## Generic talents
 
@@ -51,7 +51,7 @@ Also, resting will decrease your equilibrium by %0.2f per turn.
 
 #### __Liquefaction__
 
-Crush an alchemist gem and use the released power to vibrate the ground so quickly that it partially liquifies. Targets an area of radius %d dealing %d physical damage per turn with a 25%% chance to stun.
+Crush an alchemist gem and use the released power to vibrate the ground so quickly that it partially liquefies. Targets an area of radius %d dealing %d physical damage per turn with a 25%% chance to stun.
 
 The vibrations last for for %d turns.
 
