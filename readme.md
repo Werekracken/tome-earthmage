@@ -16,8 +16,6 @@ This addon for [Tales of Maj'Eyal](https://te4.org/) adds the Earth Mage as a ma
 
 Mana and equilibrium are their resources and their most important stat is Magic followed by Willpower and Constitution. They use some existing talent trees from Archmage and Stone Warden, and have a new class tree: Spell / Lapidary. Their playstyle is multitarget, area of effect, and damage over time, with a lot of options for survivability.
 
-[Github](https://github.com/Werekracken/tome-earthmage)
-
 [Download](https://te4.org/games/addons/tome/earthmage)
 
 [Forum](https://forums.te4.org/viewtopic.php?f=50&t=52021&sid=ea70523876a510542ec09a7df86201a2)
