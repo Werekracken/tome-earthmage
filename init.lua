@@ -7,7 +7,7 @@ weight = 2000
 author = {"werekracken"}
 tags = {"class", "earth", "mage", "wilder", "stone", "archmage", "stone warden"}
 homepage = "https://te4.org/user/102798/addons"
-description = [[ 
+description = [[
 Adds the Earth Mage as a mage class that combines earth magics with wild gifts. Earth Mages have learned the basics of how to create and use alchemist gems, but developed their own specialized uses as well.
 
 Mana and equilibruim are their resources and their most important stat is Magic followed by Willpower and Constitution. They use some existing talent trees from Archmage and Stone Warden, and have a new class tree: Spell / Lapidary. Their playstyle is multitarget, area of effect, and damage over time, with a lot of options for survivability.
@@ -56,6 +56,9 @@ At level 3, it can be targeted.
 ---Changelog
 v1.0.0
 Initial release
+
+v1.0.1
+Fixed Cleansing Crystals to clean more than just magic effects as intended.
 ]]
 overload = true
 superload = false

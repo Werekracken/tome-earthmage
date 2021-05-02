@@ -18,7 +18,7 @@ newBirthDescriptor{
 		function(actor)
 			if core.shader.active(4) then
             actor:addParticles(Particles.new("shader_ring_rotating", 1, {toback=true, rotation=0, radius=1}, {type="stone", hide_center=1, color1={0.5, 0.5, 0.5, 1}, color2={0.4, 0.3, 0.2, 1}, time_factor = 700000}))
-			else 
+			else
             actor:addParticles(Particles.new("crystalline_focus", 1))
          end
 		end,

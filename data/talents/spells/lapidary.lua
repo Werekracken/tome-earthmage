@@ -1,7 +1,7 @@
 newTalent{
 	name = "Living Stone", short_name = "WK_LIVING_STONE",
 	type = {"spell/lapidary",1},
-    image = "talents/livingstone.png",
+	image = "talents/livingstone.png",
 	require = techs_con_req1,
 	points = 5,
 	sustain_mana = 20,
@@ -9,31 +9,31 @@ newTalent{
 	cooldown = 10,
 	mode = "sustained",
 	tactical = { BUFF = 2 },
-   	getImmunity = function(self, t) return .2 * math.ceil(self:getTalentLevelRaw(t)) end,
-    getResist = function(self, t) return self:combatStatScale("con", 12, 50, 0.75) end,
+	getImmunity = function(self, t) return .2 * math.ceil(self:getTalentLevelRaw(t)) end,
+	getResist = function(self) return self:combatStatScale("con", 12, 50, 0.75) end,
 	restingRegen = function(self, t) return self:combatTalentScale(t, 0.5, 2.5, 0.75) end,
 	passives = function(self, t, p)
 		self:talentTemporaryValue(p, "equilibrium_regen_on_rest", -t.restingRegen(self, t))
 	end,
-    activate = function(self, t)
+	activate = function(self, t)
 		game:playSoundNear(self, "talents/spell_generic")
-        local ret = {
+		local ret = {
 			teleport = self:addTemporaryValue("teleport_immune", t.getImmunity(self, t)),
 			knockback = self:addTemporaryValue("knockback_immune", t.getImmunity(self, t)),
-            resPhys = self:addTemporaryValue("resists", {[DamageType.PHYSICAL]=t.getResist(self, t)}),
+			resPhys = self:addTemporaryValue("resists", {[DamageType.PHYSICAL]=t.getResist(self, t)}),
 		}
-        return ret
+		return ret
 	end,
-	deactivate = function(self, t, p)
-        self:removeTemporaryValue("teleport_immune", p.teleport)
+	deactivate = function(self, t, p) -- luacheck: ignore 212
+		self:removeTemporaryValue("teleport_immune", p.teleport)
 		self:removeTemporaryValue("knockback_immune", p.knockback)
-        self:removeTemporaryValue("resists", p.resPhys)
+		self:removeTemporaryValue("resists", p.resPhys)
 		if p.particle then self:removeParticles(p.particle) end
 		return true
 	end,
 	info = function(self, t)
-        local immune = t.getImmunity(self, t) * 100
-        local resist = t.getResist(self, t)
+		local immune = t.getImmunity(self, t) * 100
+		local resist = t.getResist(self, t)
 		local rest = t.restingRegen(self, t)
 		return ([[Like stone, you are not easily moved nor damaged. While active, increases your resistances to being teleported and knocked back by %d%% and increases your physical resistance by %d%%.
 		Physical resistance increases with Constitution.
@@ -45,15 +45,15 @@ newTalent{
 newTalent{
 	name = "Liquefaction", short_name = "WK_LIQUEFACTION",
 	type = {"spell/lapidary", 2},
-    image = "talents/liquefaction.png",
+	image = "talents/liquefaction.png",
 	require = techs_con_req2,
 	points = 5,
-    mana = 20,
+	mana = 20,
 	equilibrium = 10,
 	cooldown = 12,
 	tactical = { ATTACKAREA = {PHYSICAL = 2}, DISABLE = 2 },
 	range = 6,
-	radius = function(self, t) return 4 end,
+	radius = 4,
 	direct_hit = true,
 	requires_target = true,
 	target = function(self, t)
@@ -104,16 +104,16 @@ newTalent{
 newTalent{
 	name = "Rejuvenation", short_name = "WK_REJUVINATION",
 	type = {"spell/lapidary", 3},
-    image = "talents/rejuvination.png",
+	image = "talents/rejuvination.png",
 	require = techs_con_req3,
 	points = 5,
-    mana = 10,
+	mana = 10,
 	equilibrium = 3,
 	tactical = { HEAL = 2, BUFF = 2 },
-	on_pre_use = function(self, t)
+	on_pre_use = function(self)
 		return not self:hasEffect(self.EFF_MANASURGE) and not self:hasEffect(self.EFF_REGENERATION)
 	end,
-    cooldown = function(self, t) return self:combatTalentLimit(t, 10, 30, 16) end,
+	cooldown = function(self, t) return self:combatTalentLimit(t, 10, 30, 16) end,
 	getDuration = function(self, t) return 4 + math.ceil(self:getTalentLevelRaw(t)) end,
 	getRegen = function(self, t) return self:combatStatScale("con", 3, 7, 1.25) + (self:getTalentLevel(t) * 10) end,
 	action = function(self, t)
@@ -127,18 +127,16 @@ newTalent{
 		ammo = self:removeObject(self:getInven("QUIVER"), 1)
 		if not ammo then return end
 
-        local dur = t.getDuration(self, t)
+		local dur = t.getDuration(self, t)
 		local regen = t.getRegen(self, t)
-        self:setEffect(self.EFF_REGENERATION, dur, {power=regen})
-        self:setEffect(self.EFF_MANASURGE, dur, {power=self.mana_regen * 10})
+		self:setEffect(self.EFF_REGENERATION, dur, {power=regen})
+		self:setEffect(self.EFF_MANASURGE, dur, {power=self.mana_regen * 10})
 		return true
-
-		
 	end,
 	info = function(self, t)
-        local dur = t.getDuration(self, t)
+		local dur = t.getDuration(self, t)
 		local regen = t.getRegen(self, t)
-        return ([[Use two alchemist gems to surround yourself with rejuvenating aura, increasing health regeneration by %d and mana regeneration by 1000%% for %d turns.
+		return ([[Use two alchemist gems to surround yourself with rejuvenating aura, increasing health regeneration by %d and mana regeneration by 1000%% for %d turns.
 		Health regeneration increases with Constitution.]]):
 		tformat(regen, dur)
 	end,
@@ -147,14 +145,14 @@ newTalent{
 newTalent{
 	name = "Cleansing Crystals", short_name = "WK_CLEANSING_CRYSTALS",
 	type = {"spell/lapidary",4},
-    image = "talents/cleansing_crystals.png",
+	image = "talents/cleansing_crystals.png",
 	require = techs_con_req4,
 	points = 5,
 	mana = 25,
 	equilibrium = 5,
-	requires_target = true,
 	cooldown = function(self, t) return self:combatTalentLimit(t, 10, 30, 16) end,
-	tactical = { CURE = function(self, t, aitarget)
+	requires_target = function(self, t) return self:getTalentLevel(t) >= 3 and (self.player or t.tactical.cure(self, t) <= 0) end,
+	tactical = { CURE = function(self)
 		local nb = 0
 		for eff_id, p in pairs(self.tmp) do
 			local e = self.tempeffect_def[eff_id]
@@ -162,7 +160,7 @@ newTalent{
 		end
 		return nb
 	end,
-	DISABLE = function(self, t, aitarget)
+	DISABLE = function(self, aitarget)
 		local nb = 0
 		for eff_id, p in pairs(aitarget.tmp) do
 			local e = self.tempeffect_def[eff_id]
@@ -176,7 +174,6 @@ newTalent{
 		end
 		return nb^0.5
 	end},
-	requires_target = function(self, t) return self:getTalentLevel(t) >= 3 and (self.player or t.tactical.cure(self, t) <= 0) end,
 	range = 10,
 	getRemoveCount = function(self, t) return math.floor(self:combatTalentScale(t, 1, 5, "log")) end,
 	action = function(self, t)
@@ -208,7 +205,7 @@ newTalent{
 		if self:reactionToward(target) < 0 then
 			for eff_id, p in pairs(target.tmp) do
 				local e = target.tempeffect_def[eff_id]
-				if e.type == "magical" and e.status == "beneficial" then
+				if e.status == "beneficial" then
 					effs[#effs+1] = {"effect", eff_id}
 				end
 			end
@@ -216,15 +213,15 @@ newTalent{
 			-- Go through all sustained spells
 			for tid, act in pairs(target.sustain_talents) do
 				if act then
-					local talent = target:getTalentFromId(tid)
-					if talent.is_spell then effs[#effs+1] = {"talent", tid} end
+					--local talent = target:getTalentFromId(tid)
+					effs[#effs+1] = {"talent", tid}
 				end
 			end
 		else
 			for eff_id, p in pairs(target.tmp) do
 				local e = target.tempeffect_def[eff_id]
-				if e.type == "magical" and e.status == "detrimental" then
-					effs[#effs+1] = {"effect", eff_id}
+				if e.status == "detrimental" then
+						effs[#effs+1] = {"effect", eff_id}
 				end
 			end
 		end
