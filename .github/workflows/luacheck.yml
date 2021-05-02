@@ -20,4 +20,4 @@ jobs:
         luarocks install luacheck
         luarocks install lanes
     - name: Run ‘luacheck’ linter
-      run: luacheck -j$(nproc) . --codes --no-global --no-max-line-length
+      run: luacheck -j$(nproc) . --codes --no-global --no-max-line-length --ignore 213
