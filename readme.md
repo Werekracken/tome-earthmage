@@ -75,3 +75,6 @@ At level 3, it can be targeted.
 
 v1.0.0
 Initial release
+
+v1.0.1
+Fixed Cleansing Crystals to clean more than just magic effects as intended.
